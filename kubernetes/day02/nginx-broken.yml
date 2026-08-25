@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-broken
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-broken
+  template:
+    metadata:
+      labels:
+        app: nginx-broken
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:this-image-does-not-exist
+          ports:
+            - containerPort: 80

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-crash
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-crash
+  template:
+    metadata:
+      labels:
+        app: nginx-crash
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:latest
+          command: ["/bin/sh", "-c"]
+          args:
+            - "echo 'NGINX application starting...'; echo 'Application failed!'; exit 1"
